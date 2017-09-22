@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: "Roboto mono", monospace;
+}
+
+.button {
+  font: 16px "Roboto mono", monospace;
+}
+
+#APP_NAME, #APP_NAME > section {
+  min-height: 100vh;
+}
+
+
+
+/* Generic Classes */
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  &.reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+.flex-shrink {
+  flex-shrink: 1;
+}
+.flex-all, .flex-spacer {
+  flex: 1 1 0%;
+}
+
+.center-contents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
