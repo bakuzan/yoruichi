@@ -33,3 +33,10 @@ type alias Task =
   -- , createdDate: Date
   -- , updatedDate: Date
   }
+
+
+
+type alias Header =
+  { name: String
+  , number: Int
+  }
