@@ -3,6 +3,7 @@ module Components.Calendar.Core exposing (view)
 import Date exposing (Date)
 import Html exposing (Html, div, table, thead, tbody, tr, th, td, button, text)
 import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
 
 import Models exposing (Model)
 import Msgs exposing (Msg)
@@ -39,11 +40,12 @@ viewControls targetDate =
 
   in
   div [class "calendar__controls"]
-      [ button [class "button"] [text "prev"]
+      [ button [class "button", onClick (Msgs.GoToMonth)] [text "prev"]
       , div [class "calendar__month-text"]
             [ text ((toString month) ++ " " ++ (toString year))
+            , text (toString targetDate)
             ]
-      , button [class "button"] [text "next"]
+      , button [class "button", onClick (Msgs.GoToMonth)] [text "next"]
       ]
 
 

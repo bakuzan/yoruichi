@@ -13,8 +13,16 @@ update msg model =
     Msgs.SetTimePeriod period ->
       ( { model | timePeriod = period }, Cmd.none)
 
+    Msgs.StartUpDate date ->
+      ( { model | today = Just date
+                , targetDate = Just date
+                }, Cmd.none)
+
     Msgs.UpdateDate date ->
       ( { model | targetDate = Just date }, Cmd.none)
+
+    Msgs.GoToMonth ->
+      ( model, Cmd.none)
 
     Msgs.CompleteTask taskId ->
       let

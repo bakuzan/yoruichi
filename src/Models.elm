@@ -9,6 +9,7 @@ import Msgs
 
 type alias Model =
     { timePeriod: String
+    , today: Maybe Date.Date
     , targetDate: Maybe Date.Date
     , tasks: Tasks
     }
@@ -16,11 +17,11 @@ type alias Model =
 
 initialModel : Model
 initialModel =
-  Model "DAY" Nothing [ Task 0 "Buy Milk" False
-                      , Task 1 "Read Paper" False
-                      , Task 2 "Cut the grass" False
-                      , Task 3 "Put the bins out" False
-                      ]
+  Model "DAY" Nothing Nothing [ Task 0 "Buy Milk" False
+                              , Task 1 "Read Paper" False
+                              , Task 2 "Cut the grass" False
+                              , Task 3 "Put the bins out" False
+                              ]
 
 
 
