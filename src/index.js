@@ -3,6 +3,6 @@ import './Main.css';
 import { Main } from './Main.elm';
 import registerServiceWorker from './registerServiceWorker';
 
-Main.embed(document.getElementById('APP_NAME'));
+Main.embed(document.getElementById('yoruichi'));
 
 registerServiceWorker();

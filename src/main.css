@@ -13,7 +13,7 @@ body {
   font: 16px "Roboto mono", monospace;
 }
 
-#APP_NAME, #APP_NAME > section {
+#yoruichi, #yoruichi > section {
   min-height: 100vh;
 }
 

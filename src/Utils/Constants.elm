@@ -8,7 +8,7 @@ import Components.RadioButton.RadioButton as RadioButton
 
 appName : String
 appName =
-  "APP_NAME"
+  "yoruichi"
 
 
 timePeriods : List RadioButton.RadioOption
