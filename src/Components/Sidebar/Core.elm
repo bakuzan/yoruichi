@@ -6,7 +6,8 @@ import Html.Attributes exposing (id, value)
 
 import Models exposing (Model)
 import Msgs exposing (Msg)
-import Components.RadioButton.RadioButton as RadioButton
+import Components.RadioButton.Core as RadioButton
+import Components.Calendar.Core as Calendar
 
 import Utils.Constants as Constants
 
@@ -15,7 +16,5 @@ view : Model -> Html Msg
 view model =
   div [id (Constants.appName ++ "-sidebar")]
       [ RadioButton.viewRadioGroup "timePeriod" model.timePeriod Constants.timePeriods
-      , div []
-            [ text "Calendar control here"
-            ]
+      , Calendar.view
       ]

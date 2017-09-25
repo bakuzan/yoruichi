@@ -3,7 +3,7 @@ module Utils.Constants exposing (..)
 import Models exposing (Header)
 import Msgs exposing (Msg)
 
-import Components.RadioButton.RadioButton as RadioButton
+import Components.RadioButton.Core as RadioButton
 
 
 appName : String
@@ -31,4 +31,15 @@ months =
   ,{ name = "Oct", number = 9 }
   ,{ name = "Nov", number = 10 }
   ,{ name = "Dec", number = 11 }
+  ]
+
+days : List Header
+days =
+  [{ name = "Sun", number = 0 }
+  ,{ name = "Mon", number = 1 }
+  ,{ name = "Tue", number = 2 }
+  ,{ name = "Wed", number = 3 }
+  ,{ name = "Thu", number = 4 }
+  ,{ name = "Fri", number = 5 }
+  ,{ name = "Sat", number = 6 }
   ]

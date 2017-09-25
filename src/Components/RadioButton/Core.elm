@@ -1,4 +1,4 @@
-module Components.RadioButton.RadioButton exposing (..)
+module Components.RadioButton.Core exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
