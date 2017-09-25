@@ -16,5 +16,5 @@ view : Model -> Html Msg
 view model =
   div [id (Constants.appName ++ "-sidebar")]
       [ RadioButton.viewRadioGroup "timePeriod" model.timePeriod Constants.timePeriods
-      , Calendar.view
+      , Calendar.view model
       ]

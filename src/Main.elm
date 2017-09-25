@@ -1,5 +1,7 @@
 module Main exposing (..)
 
+import Task
+import Date
 import Html
 import Models exposing (Model, initialModel)
 import Msgs exposing (Msg)
@@ -12,7 +14,7 @@ import View exposing (view)
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, Cmd.none )
+    ( initialModel, Task.perform Msgs.UpdateDate Date.now)
 
 
 

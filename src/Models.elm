@@ -1,22 +1,26 @@
 module Models exposing(..)
 
+import Date
+
+import Msgs
 
 ---- MODEL ----
 
 
 type alias Model =
     { timePeriod: String
+    , targetDate: Maybe Date.Date
     , tasks: Tasks
     }
 
 
 initialModel : Model
 initialModel =
-  Model "DAY" [ Task 0 "Buy Milk" False
-              , Task 1 "Read Paper" False
-              , Task 2 "Cut the grass" False
-              , Task 3 "Put the bins out" False
-              ]
+  Model "DAY" Nothing [ Task 0 "Buy Milk" False
+                      , Task 1 "Read Paper" False
+                      , Task 2 "Cut the grass" False
+                      , Task 3 "Put the bins out" False
+                      ]
 
 
 

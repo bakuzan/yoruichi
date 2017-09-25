@@ -1,0 +1,10 @@
+.calendar .calendar__controls {
+  display: flex;
+}
+
+.calendar .calendar__month-text {
+  display: flex;
+  flex: 1 1 100%;
+  justify-content: center;
+  text-transform: uppercase;
+}
