@@ -1,10 +1,12 @@
 module Components.Sidebar.Core exposing (view)
 
-import Html exposing (Html, div, text)
-import Html.Attributes exposing (id)
+import Html exposing (Html, div, select, option, text)
+import Html.Attributes exposing (id, value)
+
 
 import Models exposing (Model)
 import Msgs exposing (Msg)
+import Components.RadioButton.RadioButton as RadioButton
 
 import Utils.Constants as Constants
 
@@ -12,5 +14,8 @@ import Utils.Constants as Constants
 view : Model -> Html Msg
 view model =
   div [id (Constants.appName ++ "-sidebar")]
-      [ text model.test
+      [ RadioButton.viewRadioGroup "timePeriod" model.timePeriod Constants.timePeriods
+      , div []
+            [ text "Calendar control here"
+            ]
       ]

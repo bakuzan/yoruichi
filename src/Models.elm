@@ -5,14 +5,18 @@ module Models exposing(..)
 
 
 type alias Model =
-    { test: String
+    { timePeriod: String
     , tasks: Tasks
     }
 
 
 initialModel : Model
 initialModel =
-  Model "MY TEST STRING" [Task 0 "Buy Milk" False, Task 1 "Read Paper" False]
+  Model "DAY" [ Task 0 "Buy Milk" False
+              , Task 1 "Read Paper" False
+              , Task 2 "Cut the grass" False
+              , Task 3 "Put the bins out" False
+              ]
 
 
 

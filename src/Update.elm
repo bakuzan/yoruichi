@@ -10,6 +10,9 @@ import Models exposing (Model)
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
+    Msgs.SetTimePeriod period ->
+      ( { model | timePeriod = period }, Cmd.none)
+
     Msgs.CompleteTask taskId ->
       let
         updateTask t =
