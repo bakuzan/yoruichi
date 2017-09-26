@@ -16,9 +16,20 @@
 .calendar-week .calendar-week__day {
   text-align: center;
 }
-.calendar-week .calendar-week__day.dummy-day {
-  background-color: #eee;
-}
 .calendar-week .calendar-week__day > .button {
   width: 100%;
+}
+
+/* Special states */
+.calendar-week.active {
+  background-color: #f00;
+}
+.calendar-week .calendar-week__day.active {
+  background-color: #f00;
+}
+.calendar-week .calendar-week__day.is-today {
+  background-color: #00f;
+}
+.calendar-week .calendar-week__day.dummy-day {
+  background-color: #eee;
 }

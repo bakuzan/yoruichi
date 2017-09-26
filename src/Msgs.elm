@@ -6,7 +6,9 @@ import Date exposing (Date)
 type Msg
     = NoOp
     | SetTimePeriod String
-    | StartUpDate Date
+    | SetStartUpDate Date
     | UpdateDate Date
     | GoToMonth Date
+    | EnterCreateMode Int
+    | ExitCreateMode
     | CompleteTask Int

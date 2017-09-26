@@ -11,17 +11,19 @@ type alias Model =
     { timePeriod: String
     , today: Maybe Date.Date
     , targetDate: Maybe Date.Date
+    , isCreateMode: Bool
     , tasks: Tasks
+    , task: Task
     }
 
 
 initialModel : Model
 initialModel =
-  Model "DAY" Nothing Nothing [ Task 0 "Buy Milk" False
-                              , Task 1 "Read Paper" False
-                              , Task 2 "Cut the grass" False
-                              , Task 3 "Put the bins out" False
-                              ]
+  Model "DAY" Nothing Nothing False [ Task 1 "Buy Milk" False
+                                    , Task 2 "Read Paper" False
+                                    , Task 3 "Cut the grass" False
+                                    , Task 4 "Put the bins out" False
+                                    ] emptyTaskModel
 
 
 
@@ -39,6 +41,9 @@ type alias Task =
   -- , updatedDate: Date
   }
 
+emptyTaskModel : Task
+emptyTaskModel =
+  Task 0 "" False
 
 
 type alias Header =

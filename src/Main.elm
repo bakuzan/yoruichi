@@ -14,7 +14,7 @@ import View exposing (view)
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, Task.perform Msgs.StartUpDate Date.now)
+    ( initialModel, Task.perform Msgs.SetStartUpDate Date.now)
 
 
 

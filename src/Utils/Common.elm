@@ -4,7 +4,7 @@ import Date exposing (Date)
 import Html exposing (Attribute)
 import Html.Attributes exposing (attribute)
 
-
+import Models exposing (Tasks, Task, emptyTaskModel)
 
 
 setRole : String -> Attribute msg
@@ -17,6 +17,13 @@ splitList i list =
   case List.take i list of
     [] -> []
     listHead -> listHead :: splitList i (List.drop i list)
+
+
+findInList : (Task -> Bool) -> Tasks -> Task
+findInList f list =
+  List.filter f list
+    |> List.head
+    |> Maybe.withDefault emptyTaskModel
 
 
 extractDate : Maybe Date -> Date

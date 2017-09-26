@@ -2,8 +2,9 @@ module Update exposing (..)
 
 
 import Msgs exposing (Msg)
-import Models exposing (Model)
+import Models exposing (Model, emptyTaskModel)
 
+import Utils.Common as Common
 
 ---- UPDATE ----
 
@@ -13,7 +14,7 @@ update msg model =
     Msgs.SetTimePeriod period ->
       ( { model | timePeriod = period }, Cmd.none)
 
-    Msgs.StartUpDate date ->
+    Msgs.SetStartUpDate date ->
       ( { model | today = Just date
                 , targetDate = Just date
                 }, Cmd.none)
@@ -23,6 +24,19 @@ update msg model =
 
     Msgs.GoToMonth firstOfAMonth ->
       ( { model | targetDate = Just firstOfAMonth }, Cmd.none)
+
+    Msgs.EnterCreateMode taskId ->
+      let
+        task =
+          Common.findInList (\x -> x.id == taskId) model.tasks
+
+      in
+      ( { model | isCreateMode = True
+                , task = task
+                }, Cmd.none)
+
+    Msgs.ExitCreateMode ->
+      ( { model | isCreateMode = False }, Cmd.none)
 
     Msgs.CompleteTask taskId ->
       let

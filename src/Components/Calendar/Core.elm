@@ -134,7 +134,7 @@ viewDay : Date -> Date -> Int -> Html Msg
 viewDay today target dateNum =
   let
     isToday =
-      dateNum == (Date.day today)
+      dateNum == (Date.day today) && (Date.month today) == (Date.month target) && (Date.year today) == (Date.year target)
 
     isDayActive =
       dateNum == (Date.day target)
@@ -142,21 +142,27 @@ viewDay today target dateNum =
     isDummyDay =
       dateNum == 0
 
-    date =
+    dateStr =
       if isDummyDay
         then ""
         else toString dateNum
 
+    date =
+      Common.dateFromString ((toString (Date.year target)) ++ "-" ++ (toString (Date.month target)) ++ "-" ++ dateStr)
+
   in
   td [class "calendar-week__day", classList [("dummy-day", isDummyDay), ("active", isDayActive), ("is-today", isToday)]]
-     [ viewDayContent isDummyDay [(text date)]
+     [ viewDayContent isDummyDay [(text dateStr)] date
      ]
 
-viewDayContent : Bool -> List (Html Msg) -> Html Msg
-viewDayContent blockInteraction children =
+
+viewDayContent : Bool -> List (Html Msg) -> Date -> Html Msg
+viewDayContent blockInteraction children date =
   if blockInteraction
     then div [] ([] ++ children)
-    else button [class "button"] ([] ++ children)
+    else button [class "button", onClick (Msgs.UpdateDate date)]
+                ([]
+                ++ children)
 
 
 -- Helper functions
