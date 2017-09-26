@@ -109,21 +109,36 @@ viewCalendarBody model =
 viewCalendarWeek : Model -> List Int -> Html Msg
 viewCalendarWeek model squares =
   let
+    targetDate =
+      Common.extractDate model.targetDate
+
+    isWeekActive =
+      model.timePeriod == "WEEK" && List.any (\x -> x == (Date.day targetDate)) squares
+
     len =
       List.length squares
 
     squaresWithDummies =
       squares ++ (populateArrayForDummies (7 - len))
 
+    constructDay =
+      viewDay (Common.extractDate model.today) targetDate
+
   in
-  tr [class "calendar-week"]
+  tr [class "calendar-week", classList [("active", isWeekActive)]]
      ([]
-     ++ List.map viewDay squaresWithDummies)
+     ++ List.map constructDay squaresWithDummies)
 
 
-viewDay : Int -> Html Msg
-viewDay dateNum =
+viewDay : Date -> Date -> Int -> Html Msg
+viewDay today target dateNum =
   let
+    isToday =
+      dateNum == (Date.day today)
+
+    isDayActive =
+      dateNum == (Date.day target)
+
     isDummyDay =
       dateNum == 0
 
@@ -133,7 +148,7 @@ viewDay dateNum =
         else toString dateNum
 
   in
-  td [class "calendar-week__day", classList [("dummy-day", isDummyDay)]]
+  td [class "calendar-week__day", classList [("dummy-day", isDummyDay), ("active", isDayActive), ("is-today", isToday)]]
      [ viewDayContent isDummyDay [(text date)]
      ]
 
