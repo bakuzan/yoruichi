@@ -35,13 +35,18 @@ view model =
 viewTaskList : Model -> Html Msg
 viewTaskList model =
   div []
-      [ ul []
+      [ ul [class "list column one"]
            ([] ++ List.map viewTaskItem model.tasks)
       ]
 
 
 viewTaskItem : Task -> Html Msg
 viewTaskItem task =
-  li []
+  li [class "flex"]
      [ Checkbox.view task.description [checked task.isComplete, onClick (Msgs.CompleteTask task.id), disabled task.isComplete]
+     , div [class "flex-grow"]
+           [ button [class "button"]
+                    [ text "||"
+                    ]
+           ]
      ]
