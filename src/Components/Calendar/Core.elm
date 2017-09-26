@@ -2,13 +2,14 @@ module Components.Calendar.Core exposing (view)
 
 import Date exposing (Date)
 import Html exposing (Html, div, table, thead, tbody, tr, th, td, button, text)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, classList)
 import Html.Events exposing (onClick)
 
 import Models exposing (Model)
 import Msgs exposing (Msg)
 
 import Utils.Constants as Constants
+import Utils.Common as Common
 
 
 
@@ -16,44 +17,37 @@ view : Model -> Html Msg
 view model =
   div [class "calendar"]
       [ viewControls model.targetDate
-      , viewCalendar
+      , viewCalendar model
       ]
 
 
 viewControls : Maybe Date -> Html Msg
 viewControls targetDate =
   let
-    extractDate date =
-      case date of
-        Just d -> Date.toTime d
-        Nothing -> 0
+    date =
+      Common.extractDate targetDate
 
     year =
-      extractDate targetDate
-        |> Date.fromTime
-        |> Date.year
+      Date.year date
 
     month =
-      extractDate targetDate
-        |> Date.fromTime
-        |> Date.month
+      Date.month date
 
   in
   div [class "calendar__controls"]
       [ button [class "button", onClick (Msgs.GoToMonth)] [text "prev"]
       , div [class "calendar__month-text"]
             [ text ((toString month) ++ " " ++ (toString year))
-            , text (toString targetDate)
             ]
       , button [class "button", onClick (Msgs.GoToMonth)] [text "next"]
       ]
 
 
-viewCalendar : Html Msg
-viewCalendar =
+viewCalendar : Model -> Html Msg
+viewCalendar model =
   table [class "calendar__table"]
       [ viewDayNameHeader
-      , viewCalendarBody
+      , viewCalendarBody model
       ]
 
 
@@ -71,8 +65,82 @@ viewDayNameHeader =
         ]
 
 
-viewCalendarBody : Html Msg
-viewCalendarBody =
+viewCalendarBody : Model -> Html Msg
+viewCalendarBody model =
+  let
+    date =
+      Common.extractDate model.targetDate
+
+    year =
+      Date.year date
+
+    month =
+      Date.month date
+
+    monthLength =
+      Common.getMonthLength date
+
+    dayOfWeekNumber =
+      Common.dateFromString ((toString year) ++ (toString month) ++ "-1")
+        |> Date.dayOfWeek
+        |> Common.dayOfWeekToInteger
+
+    dummyDays =
+      dayOfWeekNumber - 1
+
+    squares =
+      (populateArrayForDummies dummyDays) ++ (List.range 1 monthLength)
+
+    squaresInRows =
+      Common.splitList 7 squares
+
+  in
   tbody []
-        [
-        ]
+        ([]
+        ++ List.map (viewCalendarWeek model) squaresInRows)
+
+
+viewCalendarWeek : Model -> List Int -> Html Msg
+viewCalendarWeek model squares =
+  let
+    len =
+      List.length squares
+
+    squaresWithDummies =
+      squares ++ (populateArrayForDummies (7 - len))
+
+  in
+  tr [class "calendar-week"]
+     ([]
+     ++ List.map viewDay squaresWithDummies)
+
+
+viewDay : Int -> Html Msg
+viewDay dateNum =
+  let
+    isDummyDay =
+      dateNum == 0
+
+    date =
+      if isDummyDay
+        then ""
+        else toString dateNum
+
+  in
+  td [class "calendar-week__day", classList [("dummy-day", isDummyDay)]]
+     [ viewDayContent isDummyDay [(text date)]
+     ]
+
+viewDayContent : Bool -> List (Html Msg) -> Html Msg
+viewDayContent blockInteraction children =
+  if blockInteraction
+    then div [] ([] ++ children)
+    else button [class "button"] ([] ++ children)
+
+
+-- Helper functions
+populateArrayForDummies : Int -> List Int
+populateArrayForDummies len =
+  if len == 0
+    then []
+    else List.map (\x -> 0) (List.range 1 len)

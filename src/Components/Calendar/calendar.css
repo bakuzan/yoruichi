@@ -8,3 +8,17 @@
   justify-content: center;
   text-transform: uppercase;
 }
+
+.calendar .calendar__table {
+  width: 100%;
+}
+
+.calendar-week .calendar-week__day {
+  text-align: center;
+}
+.calendar-week .calendar-week__day.dummy-day {
+  background-color: #eee;
+}
+.calendar-week .calendar-week__day > .button {
+  width: 100%;
+}
