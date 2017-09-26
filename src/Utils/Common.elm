@@ -31,6 +31,32 @@ extractDate date =
   Date.fromTime getTime
 
 
+dateToStringFormatted : Date -> String
+dateToStringFormatted date =
+  (toString (Date.year date)) ++ "-" ++ (toString (monthNameToInteger (Date.month date))) ++ "-" ++ (toString (Date.day date))
+
+
+createFirstOfTheMonth : Date -> Int -> Date
+createFirstOfTheMonth date num =
+  let
+    year =
+      Date.year date
+
+    month =
+      ((monthNameToInteger (Date.month date)) + num)
+
+    yearMonthPair =
+      if month > 12
+        then (toString (year + 1)) ++ "-1"
+        else if month < 1
+          then (toString (year - 1)) ++ "-12"
+          else ((toString year) ++ "-" ++ (toString month))
+
+  in
+  dateFromString (yearMonthPair ++ "-1")
+
+
+
 dateFromString : String -> Date
 dateFromString str =
   Date.fromString str
@@ -40,15 +66,8 @@ dateFromString str =
 getMonthLength : Date -> Int
 getMonthLength date =
   let
-    monthInteger =
-      Date.month date
-        |> monthNameToInteger
-
-    craftDateString num =
-      (toString (Date.year date)) ++ "-" ++ (toString (monthInteger + num)) ++ "-1"
-
     buildDate num =
-      dateFromString (craftDateString num)
+      createFirstOfTheMonth date num
         |> Date.toTime
 
     monthStart =

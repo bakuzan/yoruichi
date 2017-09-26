@@ -33,13 +33,19 @@ viewControls targetDate =
     month =
       Date.month date
 
+    nextMonth =
+      Common.createFirstOfTheMonth date 1
+
+    prevMonth =
+      Common.createFirstOfTheMonth date -1
+
   in
   div [class "calendar__controls"]
-      [ button [class "button", onClick (Msgs.GoToMonth)] [text "prev"]
+      [ button [class "button", onClick (Msgs.GoToMonth prevMonth)] [text "prev"]
       , div [class "calendar__month-text"]
             [ text ((toString month) ++ " " ++ (toString year))
             ]
-      , button [class "button", onClick (Msgs.GoToMonth)] [text "next"]
+      , button [class "button", onClick (Msgs.GoToMonth nextMonth)] [text "next"]
       ]
 
 

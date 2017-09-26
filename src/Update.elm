@@ -21,8 +21,8 @@ update msg model =
     Msgs.UpdateDate date ->
       ( { model | targetDate = Just date }, Cmd.none)
 
-    Msgs.GoToMonth ->
-      ( model, Cmd.none)
+    Msgs.GoToMonth firstOfAMonth ->
+      ( { model | targetDate = Just firstOfAMonth }, Cmd.none)
 
     Msgs.CompleteTask taskId ->
       let
