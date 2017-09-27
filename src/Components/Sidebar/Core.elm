@@ -19,8 +19,8 @@ view model =
       [ RadioButton.viewRadioGroup "timePeriod" model.timePeriod Constants.timePeriods
       , Calendar.view model
       , div [class "button-group"]
-            [ button [class "button", onClick (Msgs.EnterCreateMode 0)]
-                     [ text "Create"
+            [ button [class "button ripple primary", onClick (Msgs.EnterCreateMode 0)]
+                     [ text "Create Task"
                      ]
             ]
       ]

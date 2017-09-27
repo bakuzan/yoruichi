@@ -20,7 +20,7 @@ view : Model -> Html Msg
 view model =
   let
     displaySidePanel =
-      if model.isCreateMode
+      if model.isCreateMode || model.isDeleteMode
         then CreationPanel.view model
         else Sidebar.view model
 
@@ -51,7 +51,7 @@ viewTaskItem actionMenuId task =
      [ div []
            [ Checkbox.view task.description [checked task.isComplete, onClick (Msgs.CompleteTask task.id), disabled task.isComplete]
            , div [class "task-item__action-container"]
-                 [ button [class "button-icon menu-icon", onClick (Msgs.OpenTaskActions task.id)] []
+                 [ button [class "button-icon ripple menu-icon", onClick (Msgs.OpenTaskActions task.id)] []
                  , ContextMenu.view (actionMenuId == task.id) task.id
                  ]
            ]

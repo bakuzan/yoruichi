@@ -17,6 +17,11 @@ body {
   min-height: 100vh;
 }
 
+#delete-message-container {
+  padding: 0 20px;
+}
+
+
 /* Task List */
 .task-item > div {
   display: flex;

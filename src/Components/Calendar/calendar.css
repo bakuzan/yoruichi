@@ -1,3 +1,7 @@
+.calendar {
+  margin: 10px 0;
+}
+
 .calendar .calendar__controls {
   display: flex;
 }
@@ -33,6 +37,7 @@
   background-color: #00f;
   color: #fff;
 }
+.calendar-week.active .calendar-week__day:hover,
 .calendar-week .calendar-week__day.active:hover,
 .calendar-week .calendar-week__day.is-today:hover {
   color: #000;

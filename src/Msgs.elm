@@ -10,6 +10,10 @@ type Msg
     | UpdateDate Date
     | GoToMonth Date
     | EnterCreateMode Int
-    | ExitCreateMode
+    | PrepareToDelete Int
+    | ExitCreateOrDeleteMode
     | OpenTaskActions Int
     | CompleteTask Int
+    | UpdateTaskDescription String
+    | UpdateTaskFrequency String
+    | UpdateTaskDate Date

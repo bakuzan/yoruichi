@@ -1,6 +1,6 @@
 module Utils.Constants exposing (..)
 
-import Models exposing (Header)
+import Models exposing (Header, FrequencyOption)
 import Msgs exposing (Msg)
 
 import Components.RadioButton.Core as RadioButton
@@ -43,3 +43,13 @@ days =
   ,{ name = "Sat", number = 6 }
   ,{ name = "Sun", number = 7 }
   ]
+
+frequencyOptions : List FrequencyOption
+frequencyOptions =
+    [{ name = "None", number = 0 }
+    ,{ name = "Daily", number = 1 }
+    ,{ name = "Weekly", number = 2 }
+    ,{ name = "Monthly", number = 3 }
+    ,{ name = "Quarterly", number = 4 }
+    ,{ name = "Yearly", number = 5 }
+    ]
