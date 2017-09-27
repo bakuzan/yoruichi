@@ -6,6 +6,7 @@
   display: flex;
   flex: 1 1 100%;
   justify-content: center;
+  align-items: center;
   text-transform: uppercase;
 }
 
@@ -18,17 +19,23 @@
 }
 .calendar-week .calendar-week__day > .button {
   width: 100%;
+  min-width: 20px;
+  min-height: 20px;
 }
 
 /* Special states */
-.calendar-week.active {
-  background-color: #f00;
-}
+.calendar-week.active,
 .calendar-week .calendar-week__day.active {
   background-color: #f00;
+  color: #fff;
 }
 .calendar-week .calendar-week__day.is-today {
   background-color: #00f;
+  color: #fff;
+}
+.calendar-week .calendar-week__day.active:hover,
+.calendar-week .calendar-week__day.is-today:hover {
+  color: #000;
 }
 .calendar-week .calendar-week__day.dummy-day {
   background-color: #eee;

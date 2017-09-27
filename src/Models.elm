@@ -2,8 +2,6 @@ module Models exposing(..)
 
 import Date
 
-import Msgs
-
 ---- MODEL ----
 
 
@@ -12,6 +10,7 @@ type alias Model =
     , today: Maybe Date.Date
     , targetDate: Maybe Date.Date
     , isCreateMode: Bool
+    , openActionMenuFor: Int
     , tasks: Tasks
     , task: Task
     }
@@ -19,11 +18,11 @@ type alias Model =
 
 initialModel : Model
 initialModel =
-  Model "DAY" Nothing Nothing False [ Task 1 "Buy Milk" False
-                                    , Task 2 "Read Paper" False
-                                    , Task 3 "Cut the grass" False
-                                    , Task 4 "Put the bins out" False
-                                    ] emptyTaskModel
+  Model "DAY" Nothing Nothing False 0 [ Task 1 "Buy Milk" False
+                                      , Task 2 "Read Paper" False
+                                      , Task 3 "Cut the grass" False
+                                      , Task 4 "Put the bins out" False
+                                      ] emptyTaskModel
 
 
 

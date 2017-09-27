@@ -38,6 +38,9 @@ update msg model =
     Msgs.ExitCreateMode ->
       ( { model | isCreateMode = False }, Cmd.none)
 
+    Msgs.OpenTaskActions taskId ->
+      ( { model | openActionMenuFor = taskId }, Cmd.none)
+
     Msgs.CompleteTask taskId ->
       let
         updateTask t =

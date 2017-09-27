@@ -11,4 +11,5 @@ type Msg
     | GoToMonth Date
     | EnterCreateMode Int
     | ExitCreateMode
+    | OpenTaskActions Int
     | CompleteTask Int

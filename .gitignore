@@ -1,6 +1,7 @@
 # Distribution
 build/
 .env
+parent-styles.css
 
 # elm-package generated files
 elm-stuff

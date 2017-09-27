@@ -11,6 +11,7 @@ import Msgs exposing (Msg)
 import Components.Sidebar.Core as Sidebar
 import Components.CreationPanel.Core as CreationPanel
 import Components.Checkbox.Core as Checkbox
+import Components.ContextMenu.Core as ContextMenu
 
 ---- VIEW ----
 
@@ -34,19 +35,24 @@ view model =
 
 viewTaskList : Model -> Html Msg
 viewTaskList model =
+  let
+    displayTask =
+      viewTaskItem model.openActionMenuFor
+  in
   div []
-      [ ul [class "list column one"]
-           ([] ++ List.map viewTaskItem model.tasks)
+      [ ul [class "item-list"]
+           ([] ++ List.map displayTask model.tasks)
       ]
 
 
-viewTaskItem : Task -> Html Msg
-viewTaskItem task =
-  li [class "flex"]
-     [ Checkbox.view task.description [checked task.isComplete, onClick (Msgs.CompleteTask task.id), disabled task.isComplete]
-     , div [class "flex-grow"]
-           [ button [class "button"]
-                    [ text "||"
-                    ]
+viewTaskItem : Int -> Task -> Html Msg
+viewTaskItem actionMenuId task =
+  li [class "task-item"]
+     [ div []
+           [ Checkbox.view task.description [checked task.isComplete, onClick (Msgs.CompleteTask task.id), disabled task.isComplete]
+           , div [class "task-item__action-container"]
+                 [ button [class "button-icon menu-icon", onClick (Msgs.OpenTaskActions task.id)] []
+                 , ContextMenu.view (actionMenuId == task.id) task.id
+                 ]
            ]
      ]
