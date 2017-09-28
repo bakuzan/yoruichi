@@ -114,7 +114,7 @@ viewCalendarWeek model squares =
       UDate.extractDate model.targetDate
 
     isWeekActive =
-      model.timePeriod == "WEEK" && List.any (\x -> x == (Date.day targetDate)) squares
+      model.timePeriod == (Constants.timePeriod |> .week) && List.any (\x -> x == (Date.day targetDate)) squares
 
     len =
       List.length squares

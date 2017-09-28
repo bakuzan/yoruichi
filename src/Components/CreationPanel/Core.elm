@@ -61,7 +61,7 @@ viewCreateBody model =
     task =
       model.task
   in
-    div []
+    div [id "task-form"]
         [ ClearableInput.view "description" "Description" task.description
         , SelectBox.view Constants.frequencyOptions "repeatFrequency" "Frequency" task.repeatFrequency
         , div [class "has-float-label input-container clearable-input"]

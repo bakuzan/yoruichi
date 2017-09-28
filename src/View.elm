@@ -13,6 +13,10 @@ import Components.CreationPanel.Core as CreationPanel
 import Components.Checkbox.Core as Checkbox
 import Components.ContextMenu.Core as ContextMenu
 
+import Utils.Constants as Constants
+import Utils.Date as UDate
+
+
 ---- VIEW ----
 
 
@@ -38,10 +42,40 @@ viewTaskList model =
   let
     displayTask =
       viewTaskItem model.openActionMenuFor
+
+    targetDate =
+      UDate.extractDate model.targetDate
+
+    testOne =
+      (UDate.constructDateFromIntegers 2017 8 1)
+
+    testTwo =
+      UDate.getMonthLength testOne
+
+    testThree =
+      UDate.dateIntegerHandler -3 testTwo
+
+    testFour =
+      UDate.constructDateFromIntegers 2017 8 testThree
+        |> UDate.dateToDisplayString
+
+    dateRange =
+      if model.timePeriod == (Constants.timePeriod |> .day)
+        then (UDate.dateToDisplayString targetDate)
+        else (UDate.dateToDisplayString (UDate.calculateWeekStart targetDate)) ++ " - "
+
   in
   div []
-      [ ul [class "item-list"]
-           ([] ++ List.map displayTask model.tasks)
+      [ h4 [id "task-list-header"]
+           [ text ("Tasks for " ++ dateRange)
+          --  , text (toString testOne)
+          --  , text (toString testTwo)
+          --  , text (toString testThree)
+          --  , text (toString testFour)
+           ]
+      , ul [class "item-list"]
+           ([]
+           ++ List.map displayTask model.tasks)
       ]
 
 

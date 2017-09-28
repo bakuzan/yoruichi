@@ -10,11 +10,14 @@ appName : String
 appName =
   "yoruichi"
 
+timePeriod : { day: String, week: String }
+timePeriod =
+    { day = "DAY", week = "WEEK" }
 
 timePeriods : List RadioButton.RadioOption
 timePeriods =
-  [{ label = "By Day", optionValue = "DAY", action = Msgs.SetTimePeriod "DAY" }
-  ,{ label = "By Week", optionValue = "WEEK", action = Msgs.SetTimePeriod "WEEK" }
+  [{ label = "By Day", optionValue = timePeriod.day, action = Msgs.SetTimePeriod timePeriod.day }
+  ,{ label = "By Week", optionValue = timePeriod.week, action = Msgs.SetTimePeriod timePeriod.week }
   ]
 
 months : List Header

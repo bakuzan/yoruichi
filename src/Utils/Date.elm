@@ -4,6 +4,12 @@ import Date exposing (Date)
 
 
 
+padLeft : String -> String
+padLeft str =
+    if (String.length str) == 2
+      then str
+      else ("0" ++ str)
+
 
 extractDate : Maybe Date -> Date
 extractDate date =
@@ -17,26 +23,29 @@ extractDate date =
   Date.fromTime getTime
 
 
+constructDateFromIntegers : Int -> Int -> Int -> Date
+constructDateFromIntegers y m d =
+    dateFromString ((toString y) ++ "-" ++ (toString m) ++ "-" ++ (toString d))
+
+
 dateToStringFormatted : Date -> String
 dateToStringFormatted date =
-  let
-    padLeft str =
-      if (String.length str) == 2
-        then str
-        else ("0" ++ str)
-
-  in
   (toString (Date.year date)) ++ "-" ++ (padLeft (toString (monthNameToInteger (Date.month date)))) ++ "-" ++ (padLeft (toString (Date.day date)))
 
 
+dateToDisplayString : Date -> String
+dateToDisplayString date =
+  (toString (Date.day date)) ++ " " ++ (toString (Date.month date)) ++ " " ++ (toString (Date.year date))
+
+
 createFirstOfTheMonth : Date -> Int -> Date
-createFirstOfTheMonth date num =
+createFirstOfTheMonth date monthOffset =
   let
     year =
       Date.year date
 
     month =
-      ((monthNameToInteger (Date.month date)) + num)
+      ((monthNameToInteger (Date.month date)) + monthOffset)
 
     yearMonthPair =
       if month > 12
@@ -100,3 +109,68 @@ dayOfWeekToInteger day =
     Date.Fri -> 5
     Date.Sat -> 6
     Date.Sun -> 7
+
+
+calculateWeekStart : Date -> Date
+calculateWeekStart targetDate =
+  let
+      targetDateDoW =
+        Date.dayOfWeek targetDate
+
+      dayOffset =
+        (dayOfWeekToInteger targetDateDoW) - 1
+
+  in
+  if targetDateDoW == Date.Mon
+    then targetDate
+    else (getDateForOffset targetDate dayOffset)
+
+
+getDateForOffset : Date -> Int -> Date
+getDateForOffset date offset =
+    let
+        day =
+          (Date.day date) - offset
+
+        adjustMonthForDay =
+            if day < 1
+              then (monthIntegerHandler (month - 1))
+              else month
+
+        month =
+          (monthNameToInteger (Date.month date))
+
+        fixYearForMonth yearInt =
+          if day < 1 && (month - 1) < 1
+            then yearInt - 1
+            else yearInt
+
+        year =
+          (Date.year date)
+            |> fixYearForMonth
+
+        resolvedDay =
+          dateIntegerHandler day (getMonthLength (constructDateFromIntegers year adjustMonthForDay 1))
+
+    in
+    constructDateFromIntegers year adjustMonthForDay resolvedDay
+
+
+dateIntegerHandler : Int -> Int -> Int
+dateIntegerHandler date monthLength =
+  if date < 1
+    then monthLength + date
+    else
+      if date > monthLength
+        then monthLength - date
+        else date
+
+
+monthIntegerHandler : Int -> Int
+monthIntegerHandler month =
+    if month > 12
+      then month - 12
+      else
+        if month < 1
+          then 12 - month
+          else month

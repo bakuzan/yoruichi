@@ -13,12 +13,26 @@ body {
   font: 16px "Roboto mono", monospace;
 }
 
+/*  App specfic styles
+*/
+
 #yoruichi, #yoruichi > section {
   min-height: 100vh;
 }
 
 #delete-message-container {
   padding: 0 20px;
+}
+
+#task-form > div {
+  margin: 25px 0;
+}
+
+#task-list-header {
+  width: 75%;
+  min-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
@@ -42,38 +56,4 @@ body {
 }
 .task-item .button-icon.menu-icon::before {
   content: "\22EE";
-}
-
-/* Generic Classes */
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  &.reverse {
-    flex-direction: row-reverse;
-  }
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-  &.reverse {
-    flex-direction: column-reverse;
-  }
-}
-
-.flex-grow {
-  flex-grow: 1;
-}
-.flex-shrink {
-  flex-shrink: 1;
-}
-.flex-all, .flex-spacer {
-  flex: 1 1 0%;
-}
-
-.center-contents {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
