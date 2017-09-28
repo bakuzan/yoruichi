@@ -10,6 +10,7 @@ import Msgs exposing (Msg)
 
 import Utils.Constants as Constants
 import Utils.Common as Common
+import Utils.Date as UDate
 
 
 
@@ -25,7 +26,7 @@ viewControls : Maybe Date -> Html Msg
 viewControls targetDate =
   let
     date =
-      Common.extractDate targetDate
+      UDate.extractDate targetDate
 
     year =
       Date.year date
@@ -34,10 +35,10 @@ viewControls targetDate =
       Date.month date
 
     nextMonth =
-      Common.createFirstOfTheMonth date 1
+      UDate.createFirstOfTheMonth date 1
 
     prevMonth =
-      Common.createFirstOfTheMonth date -1
+      UDate.createFirstOfTheMonth date -1
 
   in
   div [class "calendar__controls"]
@@ -75,7 +76,7 @@ viewCalendarBody : Model -> Html Msg
 viewCalendarBody model =
   let
     date =
-      Common.extractDate model.targetDate
+      UDate.extractDate model.targetDate
 
     year =
       Date.year date
@@ -84,12 +85,12 @@ viewCalendarBody model =
       Date.month date
 
     monthLength =
-      Common.getMonthLength date
+      UDate.getMonthLength date
 
     dayOfWeekNumber =
-      Common.dateFromString ((toString year) ++ (toString month) ++ "-1")
+      UDate.dateFromString ((toString year) ++ (toString month) ++ "-1")
         |> Date.dayOfWeek
-        |> Common.dayOfWeekToInteger
+        |> UDate.dayOfWeekToInteger
 
     dummyDays =
       dayOfWeekNumber - 1
@@ -110,7 +111,7 @@ viewCalendarWeek : Model -> List Int -> Html Msg
 viewCalendarWeek model squares =
   let
     targetDate =
-      Common.extractDate model.targetDate
+      UDate.extractDate model.targetDate
 
     isWeekActive =
       model.timePeriod == "WEEK" && List.any (\x -> x == (Date.day targetDate)) squares
@@ -122,7 +123,7 @@ viewCalendarWeek model squares =
       squares ++ (populateArrayForDummies (7 - len))
 
     constructDay =
-      viewDay (Common.extractDate model.today) targetDate
+      viewDay (UDate.extractDate model.today) targetDate
 
   in
   tr [class "calendar-week", classList [("active", isWeekActive)]]
@@ -148,7 +149,7 @@ viewDay today target dateNum =
         else toString dateNum
 
     date =
-      Common.dateFromString ((toString (Date.year target)) ++ "-" ++ (toString (Date.month target)) ++ "-" ++ dateStr)
+      UDate.dateFromString ((toString (Date.year target)) ++ "-" ++ (toString (Date.month target)) ++ "-" ++ dateStr)
 
   in
   td [class "calendar-week__day", classList [("dummy-day", isDummyDay), ("active", isDayActive), ("is-today", isToday)]]

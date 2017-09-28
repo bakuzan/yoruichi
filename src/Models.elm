@@ -1,6 +1,9 @@
 module Models exposing(..)
 
-import Date
+
+import Date exposing (Date)
+
+
 
 ---- MODEL ----
 
@@ -19,10 +22,10 @@ type alias Model =
 
 initialModel : Model
 initialModel =
-  Model "DAY" Nothing Nothing False False 0 [ Task 1 "Buy Milk" False 2
-                                            , Task 2 "Read Paper" False 1
-                                            , Task 3 "Cut the grass" False 3
-                                            , Task 4 "Put the bins out" False 2
+  Model "DAY" Nothing Nothing False False 0 [ Task 1 "Buy Milk" False 2 "2017-09-26"
+                                            , Task 2 "Read Paper" False 1 "2017-09-26"
+                                            , Task 3 "Cut the grass" False 3 "2017-09-26"
+                                            , Task 4 "Put the bins out" False 2 "2017-09-27"
                                             ] emptyTaskModel
 
 
@@ -36,14 +39,17 @@ type alias Task =
   , description: String
   , isComplete: Bool
   , repeatFrequency: Int -- Enum for 0 None, 1 Daily, 2 Weekly, 3 Monthly, 4 Quarterly, 5 Yearly
-  -- , reapatDay: Date -- dayOfWeek for weekly, Date for monthly/Quarterly/Yearly
+  , repeatDay: String -- dayOfWeek for weekly, Date for monthly/Quarterly/Yearly
   -- , createdDate: Date
   -- , updatedDate: Date
   }
 
+-- Date hardcoded to the project start date.
+-- Will be overwritten in update
 emptyTaskModel : Task
 emptyTaskModel =
-  Task 0 "" False 0
+  Task 0 "" False 0 "2017-09-25"
+
 
 
 type alias Header =

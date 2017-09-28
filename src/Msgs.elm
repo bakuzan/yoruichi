@@ -9,6 +9,7 @@ type Msg
     | SetStartUpDate Date
     | UpdateDate Date
     | GoToMonth Date
+    | SetDefaultTaskDate Date
     | EnterCreateMode Int
     | PrepareToDelete Int
     | ExitCreateOrDeleteMode
@@ -16,4 +17,7 @@ type Msg
     | CompleteTask Int
     | UpdateTaskDescription String
     | UpdateTaskFrequency String
-    | UpdateTaskDate Date
+    | UpdateTaskDate String
+    | DeleteTask Int
+    | UpdateTask
+    | CreateTask
