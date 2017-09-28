@@ -46,32 +46,15 @@ viewTaskList model =
     targetDate =
       UDate.extractDate model.targetDate
 
-    testOne =
-      (UDate.constructDateFromIntegers 2017 8 1)
-
-    testTwo =
-      UDate.getMonthLength testOne
-
-    testThree =
-      UDate.dateIntegerHandler -3 testTwo
-
-    testFour =
-      UDate.constructDateFromIntegers 2017 8 testThree
-        |> UDate.dateToDisplayString
-
     dateRange =
       if model.timePeriod == (Constants.timePeriod |> .day)
         then (UDate.dateToDisplayString targetDate)
-        else (UDate.dateToDisplayString (UDate.calculateWeekStart targetDate)) ++ " - "
+        else (UDate.dateToDisplayString (UDate.calculateWeekStart targetDate)) ++ " - " ++ (UDate.dateToDisplayString (UDate.calculateWeekEnd targetDate))
 
   in
   div []
       [ h4 [id "task-list-header"]
            [ text ("Tasks for " ++ dateRange)
-          --  , text (toString testOne)
-          --  , text (toString testTwo)
-          --  , text (toString testThree)
-          --  , text (toString testFour)
            ]
       , ul [class "item-list"]
            ([]

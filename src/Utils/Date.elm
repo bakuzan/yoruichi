@@ -113,15 +113,25 @@ dayOfWeekToInteger day =
 
 calculateWeekStart : Date -> Date
 calculateWeekStart targetDate =
+  calculateDateOffsetWithCondition Date.Mon (\x -> negate (x - 1)) targetDate
+
+
+calculateWeekEnd : Date -> Date
+calculateWeekEnd targetDate =
+  calculateDateOffsetWithCondition Date.Sun (\x -> 7 - x) targetDate
+
+
+calculateDateOffsetWithCondition : Date.Day -> (Int -> Int) -> Date -> Date
+calculateDateOffsetWithCondition condition adjustInt targetDate =
   let
       targetDateDoW =
         Date.dayOfWeek targetDate
 
       dayOffset =
-        (dayOfWeekToInteger targetDateDoW) - 1
+        adjustInt (dayOfWeekToInteger targetDateDoW)
 
   in
-  if targetDateDoW == Date.Mon
+  if targetDateDoW == condition
     then targetDate
     else (getDateForOffset targetDate dayOffset)
 
@@ -130,30 +140,32 @@ getDateForOffset : Date -> Int -> Date
 getDateForOffset date offset =
     let
         day =
-          (Date.day date) - offset
-
-        adjustMonthForDay =
-            if day < 1
-              then (monthIntegerHandler (month - 1))
-              else month
+          (Date.day date) + offset
 
         month =
           (monthNameToInteger (Date.month date))
 
-        fixYearForMonth yearInt =
-          if day < 1 && (month - 1) < 1
-            then yearInt - 1
-            else yearInt
-
         year =
           (Date.year date)
-            |> fixYearForMonth
+
+        resolvedYear =
+          if day < 1 && (month - 1) < 1
+            then year - 1
+            else year
+
+        resolvedMonth =
+            if day < 1
+              then (monthIntegerHandler (month - 1))
+              else
+                if day > (getMonthLength date)
+                  then (monthIntegerHandler (month + 1))
+                  else month
 
         resolvedDay =
-          dateIntegerHandler day (getMonthLength (constructDateFromIntegers year adjustMonthForDay 1))
+          dateIntegerHandler day (getMonthLength date)
 
     in
-    constructDateFromIntegers year adjustMonthForDay resolvedDay
+    constructDateFromIntegers resolvedYear resolvedMonth resolvedDay
 
 
 dateIntegerHandler : Int -> Int -> Int
@@ -162,7 +174,7 @@ dateIntegerHandler date monthLength =
     then monthLength + date
     else
       if date > monthLength
-        then monthLength - date
+        then date - monthLength
         else date
 
 
