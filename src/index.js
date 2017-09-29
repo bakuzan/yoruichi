@@ -5,7 +5,7 @@ import './main.css'
 import { Main } from './Main.elm'
 import registerServiceWorker from './registerServiceWorker'
 
-console.log(process.env.NODE_ENV);
+console.log(process.env);
 if (process.env.NODE_ENV !== "production") {
 
   const getWeekExtreme = check => date => {
@@ -50,14 +50,13 @@ if (process.env.NODE_ENV !== "production") {
 
   app.ports.fetch.subscribe(function ({ timePeriod, targetDate }) {
     const date = new Date(targetDate)
-    let range, handleFilter
+    const handleFilter = d => d <= range[1] && d >= range[0]
+    let range
 
     if (timePeriod === "DAY") {
       range = [formatDateForInput(startOfDay(targetDate)), formatDateForInput(endOfDay(targetDate))]
-      handleFilter = d => d === range[0]
     } else if (timePeriod === "WEEK") {
        range = [formatDateForInput(startOfDay(weekBeginning(targetDate))), formatDateForInput(endOfDay(weekEnding(targetDate)))]
-       handleFilter = d => d <= range[1] && d >= range[0]
     }
 
     var done = false
