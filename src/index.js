@@ -67,6 +67,15 @@ if (process.env.NODE_ENV !== "production") {
     })
   })
 
+  app.ports.update.subscribe(function(task) {
+    console.log("task >> ", task);
+    console.log(`${task.id === 0 ? "CREATE" : "UPDATE"}`)
+  })
+
+  app.ports.delete.subscribe(function(taskId) {
+    console.log("delete task with id >> ", taskId);
+  })
+
 }
 
 registerServiceWorker();

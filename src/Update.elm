@@ -103,8 +103,14 @@ update msg model =
           else
             t
 
+        updatedTasks =
+          List.map updateTask model.tasks
+
+        task =
+          Common.findInList (\t -> t.id == taskId) updatedTasks
+
       in
-      ( { model | tasks = List.map updateTask model.tasks }, Cmd.none)
+      ( { model | tasks = updatedTasks }, Ports.update task)
 
     Msgs.UpdateTaskDescription value ->
       let
@@ -134,13 +140,20 @@ update msg model =
      in
      ( { model | task = { task | repeatDay = value } }, Cmd.none)
 
+    Msgs.CreateTask ->
+      ( { model | isCreateMode = False }, Ports.update model.task)
+
+    Msgs.UpdateTask ->
+      ( { model | isCreateMode = False }, Ports.update model.task)
+      
     Msgs.DeleteTask taskId ->
       let
         remainingTasks =
           List.filter (\x -> x.id /= taskId) model.tasks
 
       in
-      update Msgs.ExitCreateOrDeleteMode { model | tasks = remainingTasks }
+      ( { model | tasks = remainingTasks
+                , isDeleteMode = False }, Ports.delete taskId)
 
     _ ->
     ( model, Cmd.none )

@@ -22,11 +22,7 @@ type alias Model =
 
 initialModel : Model
 initialModel =
-  Model "DAY" Nothing Nothing False False 0 [ Task 1 "Buy Milk" False 2 "2017-09-26"
-                                            , Task 2 "Read Paper" False 1 "2017-09-26"
-                                            , Task 3 "Cut the grass" False 3 "2017-09-26"
-                                            , Task 4 "Put the bins out" False 2 "2017-09-27"
-                                            ] emptyTaskModel
+  Model "DAY" Nothing Nothing False False 0 [] emptyTaskModel
 
 
 
