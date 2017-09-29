@@ -4,7 +4,8 @@ import Task
 import Date exposing (Date)
 
 import Msgs exposing (Msg)
-import Models exposing (Model, emptyTaskModel)
+import Models exposing (Model, Query, emptyTaskModel)
+import Ports
 
 import Utils.Common as Common
 import Utils.Date as UDate
@@ -13,20 +14,39 @@ import Utils.Date as UDate
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
+  let
+    query period date =
+        Query period (UDate.dateToStringFormatted date)
+
+  in
   case msg of
+    Msgs.ReceiveTasks tasks ->
+      ( { model | tasks = tasks }, Cmd.none)
+
+    Msgs.ReceiveTask task ->
+      let
+        date =
+          UDate.extractDate model.targetDate
+      in
+      ( model, Ports.fetch (query model.timePeriod date))
+
     Msgs.SetTimePeriod period ->
-      ( { model | timePeriod = period }, Cmd.none)
+      let
+        date =
+          UDate.extractDate model.targetDate
+      in
+      ( { model | timePeriod = period }, Ports.fetch (query period date))
 
     Msgs.SetStartUpDate date ->
       ( { model | today = Just date
                 , targetDate = Just date
-                }, Cmd.none)
+                }, Ports.fetch (query model.timePeriod date))
 
     Msgs.UpdateDate date ->
-      ( { model | targetDate = Just date }, Cmd.none)
+      ( { model | targetDate = Just date }, Ports.fetch (query model.timePeriod date))
 
     Msgs.GoToMonth firstOfAMonth ->
-      ( { model | targetDate = Just firstOfAMonth }, Cmd.none)
+      ( { model | targetDate = Just firstOfAMonth }, Ports.fetch (query model.timePeriod firstOfAMonth))
 
     Msgs.SetDefaultTaskDate date ->
       let

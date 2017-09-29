@@ -61,3 +61,8 @@ type alias FrequencyOption =
   { name: String
   , number: Int
   }
+
+type alias Query =
+  { timePeriod: String
+  , targetDate: String
+  }
