@@ -54,7 +54,7 @@ update msg model =
             model.task
 
           taskDate =
-            if task.id /= 0
+            if task.id /= "0"
               then task.repeatDay
               else (UDate.extractDate (Just date)
                      |> UDate.dateToStringFormatted)
@@ -71,7 +71,7 @@ update msg model =
           Common.findInList (\x -> x.id == taskId) model.tasks
 
       in
-      ( { model | openActionMenuFor = 0
+      ( { model | openActionMenuFor = "0"
                 , isCreateMode = True
                 , isDeleteMode = False
                 , task = task
@@ -84,13 +84,16 @@ update msg model =
     Msgs.OpenTaskActions taskId ->
       ( { model | openActionMenuFor = taskId }, Cmd.none)
 
+    Msgs.CloseTaskActions ->
+      ( { model | openActionMenuFor = "0" }, Cmd.none)
+
     Msgs.PrepareToDelete taskId ->
       let
         task =
           Common.findInList (\x -> x.id == taskId) model.tasks
 
       in
-      ( { model | openActionMenuFor = 0
+      ( { model | openActionMenuFor = "0"
                 , isCreateMode = False
                 , isDeleteMode = True
                 , task = task }, Cmd.none)
@@ -141,11 +144,11 @@ update msg model =
      ( { model | task = { task | repeatDay = value } }, Cmd.none)
 
     Msgs.CreateTask ->
-      ( { model | isCreateMode = False }, Ports.update model.task)
+      ( { model | isCreateMode = False }, Ports.create model.task)
 
     Msgs.UpdateTask ->
       ( { model | isCreateMode = False }, Ports.update model.task)
-      
+
     Msgs.DeleteTask taskId ->
       let
         remainingTasks =

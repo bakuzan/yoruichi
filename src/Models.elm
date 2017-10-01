@@ -14,7 +14,7 @@ type alias Model =
     , targetDate: Maybe Date.Date
     , isCreateMode: Bool
     , isDeleteMode: Bool
-    , openActionMenuFor: Int
+    , openActionMenuFor: String
     , tasks: Tasks
     , task: Task
     }
@@ -22,7 +22,7 @@ type alias Model =
 
 initialModel : Model
 initialModel =
-  Model "DAY" Nothing Nothing False False 0 [] emptyTaskModel
+  Model "DAY" Nothing Nothing False False "0" [] emptyTaskModel
 
 
 
@@ -31,11 +31,12 @@ type alias Tasks =
 
 
 type alias Task =
-  { id: Int
+  { id: String
   , description: String
   , isComplete: Bool
   , repeatFrequency: Int -- Enum for 0 None, 1 Daily, 2 Weekly, 3 Monthly, 4 Quarterly, 5 Yearly
   , repeatDay: String -- dayOfWeek for weekly, Date for monthly/Quarterly/Yearly
+  , dayOfWeek: String
   -- , createdDate: Date
   -- , updatedDate: Date
   }
@@ -44,7 +45,7 @@ type alias Task =
 -- Will be overwritten in update
 emptyTaskModel : Task
 emptyTaskModel =
-  Task 0 "" False 0 "2017-09-25"
+  Task "0" "" False 0 "2017-09-25" "Mon"
 
 
 

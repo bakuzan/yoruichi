@@ -62,7 +62,7 @@ viewTaskList model =
       ]
 
 
-viewTaskItem : Int -> Task -> Html Msg
+viewTaskItem : String -> Task -> Html Msg
 viewTaskItem actionMenuId task =
   li [class "task-item"]
      [ div []

@@ -3,4 +3,18 @@
   right: 100%;
   background: #fff;
   box-shadow: 1px 2px 5px 1px;
+  z-index: 1;
+}
+
+.context-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.context-menu > ul {
+  z-index: 10;
 }

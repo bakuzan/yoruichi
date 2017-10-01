@@ -22,7 +22,7 @@ view model =
         if model.isDeleteMode
           then "Delete"
           else
-            if model.isCreateMode && model.task.id /= 0
+            if model.isCreateMode && model.task.id /= "0"
               then "Save"
               else "Create"
 
@@ -30,7 +30,7 @@ view model =
         if model.isDeleteMode
           then (Msgs.DeleteTask model.task.id)
           else
-            if model.isCreateMode && model.task.id /= 0
+            if model.isCreateMode && model.task.id /= "0"
               then Msgs.UpdateTask
               else Msgs.CreateTask
 

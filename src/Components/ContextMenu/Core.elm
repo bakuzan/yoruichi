@@ -8,7 +8,7 @@ import Html.Events exposing(onClick)
 import Msgs exposing (Msg)
 
 
-view : Bool -> Int -> Html Msg
+view : Bool -> String -> Html Msg
 view active taskId =
   if not active
     then text ""
@@ -25,4 +25,5 @@ view active taskId =
                                 ]
                        ]
                   ]
+             , div [class "context-menu-backdrop", onClick Msgs.CloseTaskActions] []
              ]

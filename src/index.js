@@ -38,14 +38,14 @@ if (process.env.NODE_ENV !== "production") {
 
   const app = Main.embed(document.getElementById('yoruichi'));
 
-  const tasks = [{ id: 1, description: "Buy Milk", isComplete: false, repeatFrequency: 2, repeatDay: "2017-09-25" }
-                ,{ id: 2, description: "Read Paper", isComplete: false, repeatFrequency: 1, repeatDay: "2017-09-26" }
-                ,{ id: 3, description: "Cut the grass", isComplete: false, repeatFrequency: 3, repeatDay: "2017-09-26" }
-                ,{ id: 4, description: "Put the bins out", isComplete: false, repeatFrequency: 2, repeatDay: "2017-09-27" }
-                ,{ id: 5, description: "Write Ports", isComplete: false, repeatFrequency: 0, repeatDay: "2017-09-29" }
-                ,{ id: 6, description: "Enjoy holiday", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-02" }
-                ,{ id: 7, description: "Be scared for tomorrow", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-08" }
-                ,{ id: 8, description: "Cry", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-09" }
+  const tasks = [{ id: "1", description: "Buy Milk", isComplete: false, repeatFrequency: 2, repeatDay: "2017-09-25", dayOfWeek: "Mon" }
+                ,{ id: "2", description: "Read Paper", isComplete: false, repeatFrequency: 1, repeatDay: "2017-09-26", dayOfWeek: "Tue" }
+                ,{ id: "3", description: "Cut the grass", isComplete: false, repeatFrequency: 3, repeatDay: "2017-09-26", dayOfWeek: "Tue" }
+                ,{ id: "4", description: "Put the bins out", isComplete: false, repeatFrequency: 2, repeatDay: "2017-09-27", dayOfWeek: "Wed" }
+                ,{ id: "5", description: "Write Ports", isComplete: false, repeatFrequency: 0, repeatDay: "2017-09-29", dayOfWeek: "Wed" }
+                ,{ id: "6", description: "Enjoy holiday", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-02", dayOfWeek: "Mon" }
+                ,{ id: "7", description: "Be scared for tomorrow", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-08", dayOfWeek: "Sun" }
+                ,{ id: "8", description: "Cry", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-09", dayOfWeek: "Mon" }
                 ]
 
   app.ports.fetch.subscribe(function ({ timePeriod, targetDate }) {

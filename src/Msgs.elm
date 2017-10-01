@@ -15,14 +15,15 @@ type Msg
     | UpdateDate Date
     | GoToMonth Date
     | SetDefaultTaskDate Date
-    | EnterCreateMode Int
-    | PrepareToDelete Int
+    | EnterCreateMode String
+    | PrepareToDelete String
     | ExitCreateOrDeleteMode
-    | OpenTaskActions Int
-    | CompleteTask Int
+    | OpenTaskActions String
+    | CloseTaskActions
+    | CompleteTask String
     | UpdateTaskDescription String
     | UpdateTaskFrequency String
     | UpdateTaskDate String
-    | DeleteTask Int
+    | DeleteTask String
     | UpdateTask
     | CreateTask
