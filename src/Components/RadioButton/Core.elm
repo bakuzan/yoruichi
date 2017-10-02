@@ -4,7 +4,9 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Msgs exposing (Msg)
-import Utils.Common as Common
+
+
+import Utils.Html as UHtml
 
 
 type alias RadioOption =
@@ -21,7 +23,7 @@ viewRadioGroup groupName groupValue options =
       viewRadioOption groupName groupValue
 
   in
-  div [class "radio-group", Common.setRole "radiogroup"]
+  div [class "radio-group", UHtml.setRole "radiogroup"]
       ([] ++ List.map radioOption options)
 
 
@@ -35,7 +37,7 @@ viewRadioOption groupName groupValue option =
       option.optionValue
 
   in
-  label [class "radio", Common.setRole "radio"]
+  label [class "radio", UHtml.setRole "radio"]
         [ input [type_ "radio", name groupName, value optionValue, checked (optionValue == groupValue), onClick action ] []
         , span [] [text option.label]
         ]

@@ -38,14 +38,14 @@ if (process.env.NODE_ENV !== "production") {
 
   const app = Main.embed(document.getElementById('yoruichi'));
 
-  const tasks = [{ id: "1", description: "Buy Milk", isComplete: false, repeatFrequency: 2, repeatDay: "2017-09-25", dayOfWeek: "Mon" }
-                ,{ id: "2", description: "Read Paper", isComplete: false, repeatFrequency: 1, repeatDay: "2017-09-26", dayOfWeek: "Tue" }
-                ,{ id: "3", description: "Cut the grass", isComplete: false, repeatFrequency: 3, repeatDay: "2017-09-26", dayOfWeek: "Tue" }
-                ,{ id: "4", description: "Put the bins out", isComplete: false, repeatFrequency: 2, repeatDay: "2017-09-27", dayOfWeek: "Wed" }
-                ,{ id: "5", description: "Write Ports", isComplete: false, repeatFrequency: 0, repeatDay: "2017-09-29", dayOfWeek: "Wed" }
-                ,{ id: "6", description: "Enjoy holiday", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-02", dayOfWeek: "Mon" }
-                ,{ id: "7", description: "Be scared for tomorrow", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-08", dayOfWeek: "Sun" }
-                ,{ id: "8", description: "Cry", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-09", dayOfWeek: "Mon" }
+  const tasks = [{ id: "1", description: "Buy Milk", isComplete: false, repeatFrequency: 2, repeatDay: "2017-09-25", dayOfWeek: "Mon", completedOccurances: [] }
+                ,{ id: "2", description: "Read Paper", isComplete: false, repeatFrequency: 1, repeatDay: "2017-09-26", dayOfWeek: "Tue", completedOccurances: [] }
+                ,{ id: "3", description: "Cut the grass", isComplete: false, repeatFrequency: 3, repeatDay: "2017-09-26", dayOfWeek: "Tue", completedOccurances: [] }
+                ,{ id: "4", description: "Put the bins out", isComplete: false, repeatFrequency: 2, repeatDay: "2017-09-27", dayOfWeek: "Wed", completedOccurances: [] }
+                ,{ id: "5", description: "Write Ports", isComplete: false, repeatFrequency: 0, repeatDay: "2017-09-29", dayOfWeek: "Wed", completedOccurances: [] }
+                ,{ id: "6", description: "Enjoy holiday", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-02", dayOfWeek: "Mon", completedOccurances: [] }
+                ,{ id: "7", description: "Be scared for tomorrow", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-08", dayOfWeek: "Sun", completedOccurances: [] }
+                ,{ id: "8", description: "Cry", isComplete: false, repeatFrequency: 0, repeatDay: "2017-10-09", dayOfWeek: "Mon", completedOccurances: [] }
                 ]
 
   app.ports.fetch.subscribe(function ({ timePeriod, targetDate }) {
