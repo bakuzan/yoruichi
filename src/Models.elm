@@ -37,6 +37,7 @@ type alias Task =
   , repeatFrequency: Int -- Enum for 0 None, 1 Daily, 2 Weekly, 3 Monthly, 4 Quarterly, 5 Yearly
   , repeatDay: String -- dayOfWeek for weekly, Date for monthly/Quarterly/Yearly
   , dayOfWeek: String
+  , completedOccurances: List String
   -- , createdDate: Date
   -- , updatedDate: Date
   }
@@ -45,7 +46,7 @@ type alias Task =
 -- Will be overwritten in update
 emptyTaskModel : Task
 emptyTaskModel =
-  Task "0" "" False 0 "2017-09-25" "Mon"
+  Task "0" "" False 0 "2017-09-25" "Mon" []
 
 
 

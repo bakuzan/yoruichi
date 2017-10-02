@@ -9,6 +9,7 @@ import Ports
 
 import Utils.Common as Common
 import Utils.Date as UDate
+import Utils.Functions as Functions
 
 ---- UPDATE ----
 
@@ -102,7 +103,9 @@ update msg model =
       let
         updateTask t =
           if t.id == taskId then
-            { t | isComplete = True }
+            { t | isComplete = (t.repeatFrequency == 0)
+                , completedOccurances = (Functions.updateCompletedOccurances model.targetDate t)
+                }
           else
             t
 
