@@ -20,7 +20,7 @@ type Msg
     | ExitCreateOrDeleteMode
     | OpenTaskActions String
     | CloseTaskActions
-    | CompleteTask String
+    | CompleteTask String String
     | UpdateTaskDescription String
     | UpdateTaskFrequency String
     | UpdateTaskDate String

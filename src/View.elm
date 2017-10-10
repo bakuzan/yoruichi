@@ -109,7 +109,7 @@ viewTaskItem targetDate actionMenuId task =
   in
   li [class "task-item"]
      [ div []
-           [ Checkbox.view task.description [checked isTaskComplete, onClick (Msgs.CompleteTask task.id), disabled isTaskComplete]
+           [ Checkbox.view task.description [checked isTaskComplete, onClick (Msgs.CompleteTask task.id task.dayOfWeek), disabled isTaskComplete]
            , div [class "task-item__action-container"]
                  [ button [class "button-icon ripple menu-icon", onClick (Msgs.OpenTaskActions task.id)] []
                  , ContextMenu.view (actionMenuId == task.id) task.id

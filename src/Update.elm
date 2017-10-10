@@ -99,10 +99,10 @@ update msg model =
                 , isDeleteMode = True
                 , task = task }, Cmd.none)
 
-    Msgs.CompleteTask taskId ->
+    Msgs.CompleteTask taskId dayOfWeek ->
       let
         updateTask t =
-          if t.id == taskId then
+          if t.id == taskId && t.dayOfWeek == dayOfWeek then
             { t | isComplete = (t.repeatFrequency == 0)
                 , completedOccurances = (Functions.updateCompletedOccurances model.targetDate t)
                 }
