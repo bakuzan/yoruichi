@@ -18,7 +18,7 @@ type Msg
     | EnterCreateMode String
     | PrepareToDelete String
     | ExitCreateOrDeleteMode
-    | OpenTaskActions String
+    | OpenTaskActions String String
     | CloseTaskActions
     | CompleteTask String String
     | UpdateTaskDescription String

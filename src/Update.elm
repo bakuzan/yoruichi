@@ -82,8 +82,8 @@ update msg model =
       ( { model | isCreateMode = False
                 , isDeleteMode = False }, Cmd.none)
 
-    Msgs.OpenTaskActions taskId ->
-      ( { model | openActionMenuFor = taskId }, Cmd.none)
+    Msgs.OpenTaskActions taskId dayOfWeek ->
+      ( { model | openActionMenuFor = (taskId ++ "--" ++ dayOfWeek) }, Cmd.none)
 
     Msgs.CloseTaskActions ->
       ( { model | openActionMenuFor = "0" }, Cmd.none)

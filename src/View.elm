@@ -111,8 +111,8 @@ viewTaskItem targetDate actionMenuId task =
      [ div []
            [ Checkbox.view task.description [checked isTaskComplete, onClick (Msgs.CompleteTask task.id task.dayOfWeek), disabled isTaskComplete]
            , div [class "task-item__action-container"]
-                 [ button [class "button-icon ripple menu-icon", onClick (Msgs.OpenTaskActions task.id)] []
-                 , ContextMenu.view (actionMenuId == task.id) task.id
+                 [ button [class "button-icon ripple menu-icon", onClick (Msgs.OpenTaskActions task.id task.dayOfWeek)] []
+                 , ContextMenu.view (actionMenuId == (task.id ++ "--" ++ task.dayOfWeek)) task.id
                  ]
            ]
      ]
