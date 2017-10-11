@@ -113,7 +113,7 @@ update msg model =
           List.map updateTask model.tasks
 
         task =
-          Common.findInList (\t -> t.id == taskId) updatedTasks
+          Common.findInList (\t -> t.id == taskId && t.dayOfWeek == dayOfWeek) updatedTasks
 
       in
       ( { model | tasks = updatedTasks }, Ports.update task)
